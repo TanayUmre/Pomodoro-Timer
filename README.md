@@ -27,7 +27,10 @@ The app provides a focused 30-minute work session with a circular progress indic
 
 ## 📸 Preview
 
-Add a screenshot or GIF of the application here.
+### Light Mode
+![Pomodoro Timer - Dark Mode](./screenshots/Light.png)
+### Dark Mode
+![Pomodoro Timer - Dark Mode](./screenshots/Dark.png)
 
 ## 🚀 Getting Started
 

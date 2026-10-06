@@ -56,17 +56,11 @@ Navigate into the project:
 
 ### Run the Application
 
-Start the React development server:
+Start the React development environment and Electron application with:
 
-    npm run dev
+    npm run electron:dev
 
-Then start Electron using the script configured in your `package.json`.
-
-For example:
-
-    npm run electron
-
-> The Electron application currently loads the React development server from `http://localhost:5173`.
+This command starts the development environment and automatically opens the Pomodoro Timer as an Electron desktop application.
 
 ## 📁 Project Structure
 

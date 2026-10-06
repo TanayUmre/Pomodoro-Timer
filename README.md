@@ -27,10 +27,19 @@ The app provides a focused 30-minute work session with a circular progress indic
 
 ## 📸 Preview
 
-### Light Mode
-![Pomodoro Timer - Dark Mode](./screenshots/Light.png)
-### Dark Mode
-![Pomodoro Timer - Dark Mode](./screenshots/Dark.png)
+<p align="center">
+  <img src="./screenshots/Dark.png" width="300" style="margin-right:75px">
+  <img src="./screenshots/Light.png" width="300">
+</p>
+
+<p align="center">
+  <span style="display:inline-block; width:300px; margin-right:75px;">
+    <strong>Dark Mode</strong>
+  </span>
+  <span style="display:inline-block; width:300px;">
+    <strong>Light Mode</strong>
+  </span>
+</p>
 
 ## 🚀 Getting Started
 
@@ -44,7 +53,7 @@ Make sure you have the following installed:
 
 ### Clone the Repository
 
-    git clone https://github.com/your-username/pomodoro-timer.git
+    git clone https://github.com/TanayUmre/pomodoro-timer.git
 
 Navigate into the project:
 

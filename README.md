@@ -1,249 +1,163 @@
-🍅 Pomodoro Timer
+# 🍅 Pomodoro Timer
 
-A clean and minimalist Pomodoro Timer desktop app built with React and Electron.
+A clean and minimalist **Pomodoro Timer desktop application** built with **React** and **Electron**.
 
-The app provides a focused 30-minute work session with a visual circular progress indicator, simple timer controls, dark/light mode, and a celebratory confetti animation when the session is completed.
+The app provides a focused 30-minute work session with a circular progress indicator, timer controls, dark/light mode, and a confetti animation when the session is completed.
 
-✨ Features
+## ✨ Features
 
-⏱️ 30-minute focus timer
+- ⏱️ 30-minute focus timer
+- ▶️ Start / Pause functionality
+- 🔄 Reset the current session
+- 🎉 Confetti animation when the timer reaches zero
+- 🌓 Dark and Light mode
+- 🔵 Circular SVG progress indicator
+- 💻 Desktop application powered by Electron
+- 📐 Responsive and centered UI
+- 🧹 Minimal and distraction-free interface
 
-▶️ Start / Pause functionality
+## 🛠️ Tech Stack
 
-🔄 Reset the current session
+- React
+- Electron
+- JavaScript
+- CSS
+- SVG
+- canvas-confetti
 
-🎉 Confetti celebration when the timer reaches zero
+## 📸 Preview
 
-🌓 Dark and Light mode
+Add a screenshot or GIF of the application here.
 
-🔵 Circular SVG progress indicator
+## 🚀 Getting Started
 
-💻 Desktop application powered by Electron
-
-📐 Responsive layout that stays centered within the application window
-
-🧹 Minimal and distraction-free interface
-
-🛠️ Tech Stack
-
-React — UI and application logic
-
-Electron — Desktop application wrapper
-
-JavaScript — Application logic
-
-CSS — Styling and themes
-
-SVG — Circular timer progress indicator
-
-canvas-confetti — Completion animation
-
-📸 Preview
-
-Add a screenshot or GIF of your application here.
-
-┌────────────────────────────────────┐
-│                                    │
-│          READY TO FOCUS       ☀️  │
-│                                    │
-│              ◯                     │
-│            29:42                   │
-│            MINUTES                 │
-│                                    │
-│       [    Start    ] [ Reset ]    │
-│                                    │
-│        ● 30 minute focus session   │
-│                                    │
-└────────────────────────────────────┘
-
-🚀 Getting Started
-Prerequisites
+### Prerequisites
 
 Make sure you have the following installed:
 
-Node.js
+- [Node.js](https://nodejs.org/)
+- npm
+- Git
 
-npm
+### Clone the Repository
 
-Git
-
-Clone the repository
-git clone https://github.com/your-username/pomodoro-timer.git
-
+    git clone https://github.com/your-username/pomodoro-timer.git
 
 Navigate into the project:
 
-cd pomodoro-timer
+    cd pomodoro-timer
 
-Install dependencies
-npm install
+### Install Dependencies
 
-Start the React development server
-npm run dev
+    npm install
 
+### Run the Application
 
-Then start Electron in another terminal if your project is configured that way:
+Start the React development server:
 
-npm run electron
+    npm run dev
 
+Then start Electron using the script configured in your `package.json`.
 
-The Electron window currently loads the React development server from http://localhost:5173.
+For example:
 
-📁 Project Structure
-pomodoro-timer/
-│
-├── electron/
-│   └── main.js
-│
-├── src/
-│   ├── Pomodoro.jsx
-│   ├── main.css
-│   └── ...
-│
-├── package.json
-├── package-lock.json
-└── README.md
+    npm run electron
 
+> The Electron application currently loads the React development server from `http://localhost:5173`.
 
-The exact structure may vary depending on your Vite/React setup.
+## 📁 Project Structure
 
-⚙️ How It Works
+    pomodoro-timer/
+    │
+    ├── electron/
+    │   └── main.js
+    │
+    ├── src/
+    │   ├── Pomodoro.jsx
+    │   ├── main.css
+    │   └── ...
+    │
+    ├── package.json
+    ├── package-lock.json
+    └── README.md
 
-The timer starts with:
+The exact structure may vary depending on your React/Vite setup.
 
-const TOTAL_TIME = 30 * 60;
+## ⚙️ How It Works
 
+The timer starts with a 30-minute duration.
 
-which represents a 30-minute session in seconds.
+    const TOTAL_TIME = 30 * 60;
 
-React's useState manages the timer state:
+React state manages the remaining time and timer status.
 
-const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
-const [isRunning, setIsRunning] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
+    const [isRunning, setIsRunning] = useState(false);
 
+When the timer is running, `useEffect` creates an interval that decreases the remaining time every second.
 
-When the timer is running, useEffect creates a one-second interval and decreases the remaining time.
+The circular progress indicator is calculated using the circumference of the SVG circle.
 
-The circular progress indicator is calculated using the circumference of the SVG circle:
+    const circumference = 2 * Math.PI * 120;
+    const progress = timeLeft / TOTAL_TIME;
+    const dashOffset = circumference * (1 - progress);
 
-const circumference = 2 * Math.PI * 120;
-const progress = timeLeft / TOTAL_TIME;
-const dashOffset = circumference * (1 - progress);
+When the timer reaches zero, the application triggers a confetti animation.
 
+    confetti({
+      particleCount: 150,
+      spread: 100,
+      origin: { y: 0.6 },
+    });
 
-When the timer reaches zero, the application triggers a confetti animation:
-
-confetti({
-  particleCount: 150,
-  spread: 100,
-  origin: { y: 0.6 },
-});
-
-🎨 Themes
+## 🎨 Dark & Light Mode
 
 The application supports both dark and light themes.
 
-The theme is controlled using React state:
+The current theme is managed using React state.
 
-const [isDark, setIsDark] = useState(true);
+    const [isDark, setIsDark] = useState(true);
 
+The theme is applied dynamically.
 
-The container receives either:
+    <div className={`pomodoro-container ${isDark ? "dark" : "light"}`}>
 
-pomodoro-container dark
+CSS then applies the appropriate colors and styling for each theme.
 
+## 🖥️ Electron
 
-or:
+Electron is used to run the React application as a desktop application.
 
-pomodoro-container light
+The Electron main process creates the application window with configurable dimensions and minimum sizes.
 
+    mainWindow = new BrowserWindow({
+      width: 500,
+      height: 650,
+      minWidth: 400,
+      minHeight: 550,
 
-CSS then applies the appropriate colors and styling.
+      alwaysOnTop: true,
+      frame: true,
+      autoHideMenuBar: true,
 
-🖥️ Electron
+      webPreferences: {
+        nodeIntegration: false,
+        contextIsolation: true,
+      },
+    });
 
-Electron provides the desktop environment for the React application.
+The `alwaysOnTop` option allows the Pomodoro timer to remain visible while working in other applications.
 
-The main Electron process creates the application window and loads the React development server:
+## 🔮 Future Improvements
 
-mainWindow = new BrowserWindow({
-  width: 500,
-  height: 650,
-  minWidth: 400,
-  minHeight: 550,
-
-  alwaysOnTop: true,
-  frame: true,
-  autoHideMenuBar: true,
-
-  webPreferences: {
-    nodeIntegration: false,
-    contextIsolation: true,
-  },
-});
-
-
-The alwaysOnTop option allows the Pomodoro timer to remain visible while working in other applications.
-
-🔮 Future Improvements
-
-Some ideas for future versions:
-
-🍅 Custom timer durations
-
-☕ Short and long break sessions
-
-🔔 Desktop notifications
-
-🔊 Optional sound when a session ends
-
-📊 Daily/weekly productivity statistics
-
-💾 Persistent timer settings
-
-⌨️ Keyboard shortcuts
-
-📌 Tray/minimize-to-tray functionality
-
-🎯 Multiple Pomodoro sessions
-
-⚙️ Settings panel
-
-📦 Production builds for Windows, macOS, and Linux
-
-🤝 Contributing
-
-Contributions, suggestions, and improvements are welcome.
-
-If you'd like to contribute:
-
-Fork the repository.
-
-Create a new branch.
-
-git checkout -b feature/your-feature
-
-
-Make your changes.
-
-Commit your changes.
-
-git commit -m "Add your feature"
-
-
-Push the branch.
-
-git push origin feature/your-feature
-
-
-Open a Pull Request.
-
-📄 License
-
-This project is open source and available under the MIT License.
-
-👨‍💻 Author
-
-Your Name
-
-If you found this project useful, consider giving the repository a ⭐ on GitHub.
+- 🍅 Custom focus durations
+- ☕ Short and long break sessions
+- 🔔 Desktop notifications
+- 🔊 Optional completion sounds
+- 📊 Daily and weekly productivity statistics
+- 💾 Persistent user settings
+- ⌨️ Keyboard shortcuts
+- 📌 System tray support
+- 🎯 Multiple Pomodoro sessions
+- ⚙️ Settings panel
+- 📦 Production builds for Windows, macOS, and Linux

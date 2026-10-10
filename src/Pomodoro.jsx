@@ -101,7 +101,7 @@ function Pomodoro(){
                     </div>
                     <div className="session-info">
                     <span className="dot"></span>
-                    30 minute focus session
+                    {duration} minute focus session
                 </div>
             </div>
         </div>
